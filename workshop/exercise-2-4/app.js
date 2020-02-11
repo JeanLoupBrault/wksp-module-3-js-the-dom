@@ -1,5 +1,5 @@
 // Preset values
-const FROGS = 3;
+const FROGS = 4;
 
 const track = document.getElementById('track');
 
@@ -29,9 +29,6 @@ for (let x = 0; x < FROGS; x++) {
 console.log(racers);
 
 // Exercise 2.3
-
-// Assign them each to a lane
-// Lanes have ids of 'lane-#' as set in the lane creation phase.
 racers.forEach(function(racer, id) {
     // add the frogs to a lane
     // for now, frogs are simply shapes in the lane.
@@ -50,5 +47,33 @@ racers.forEach(function(racer, id) {
     const frogProgress = document.createElement('span');
     frogProgress.id = racers[id].name;
     document.getElementById(`frog-${id+1}`).appendChild(frogProgress);
+});
 
+// Exercise 2.4
+function racingFrog(racer) {
+    let progress = racer.progress;
+    const trackWidth = track.offsetWidth;
+
+    // set a random hop length
+    const hopLength = (Math.floor(Math.random() * 100) / trackWidth * 100);
+
+    const bounce = setInterval(function() {
+        // increase the progress by the random hopLength
+        progress += hopLength;
+        // Check if progress is more than 100%. If so, set it to 100.1
+        if (progress > 100) {
+            progress = 100.1;
+            console.log(racer.name, ' has finished!');
+            clearInterval(bounce);
+        }
+        
+        // Moving the frog on the screen
+        document.querySelector(`#${racer.lane} .frog`).style.left = `${progress}%`;
+    }, Math.random() * 1000);
+}
+
+// startRace
+racers.forEach(function(racer) {
+    // call this function once for each racer.
+    racingFrog(racer);
 });

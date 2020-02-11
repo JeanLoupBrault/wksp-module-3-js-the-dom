@@ -16,3 +16,14 @@ for (laneCount = 1; laneCount <= FROGS; laneCount++) {
     // 4. Assign an id to each lane
     lane.id = `frog-${laneCount}`;
 }
+
+// exercise 2.2 
+
+let racers = [];
+
+for (let i = 0; i <= FROGS; i++) {
+    const newFrog = frogStable[i];
+    racers.push(newFrog);
+}
+console.log(racers);
+
